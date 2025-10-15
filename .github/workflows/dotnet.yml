@@ -1,0 +1,29 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: JBrLloyd.CSharp.Analyzer Nuget Publish
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Build and Pack
+      run: dotnet pack --configuration Release --output ${{ github.workspace }}/nuget
+
+    - name: Publish Package
+      run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg --api-key ${{ secrets.NUGET_APIKEY }} --source https://nuget.pkg.github.com/JBrLloyd/index.json --skip-duplicate
