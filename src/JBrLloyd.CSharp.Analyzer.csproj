@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Set the target to build a NuGet package -->
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net6;net8</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>OddsFactory.Analyzers</PackageId>
+    <Version>0.1.0</Version>
+    <Description>A package to distribute .editorconfig, analyzers, and a .props file.</Description>
+    <PackageTags>editorconfig;analyzers;props;stylecop;roslynator</PackageTags>
+    <Authors>JBrLloyd</Authors>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <DevelopmentDependency>true</DevelopmentDependency>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="standard_editorconfig" Pack="true" PackagePath="build/" />
+    <None Include="JBrLloyd.CSharp.Analyzer.props" Pack="true" PackagePath="build/" />
+    <None Include="stylecop.json" Pack="true" PackagePath="build/" />
+  </ItemGroup>
+</Project>
