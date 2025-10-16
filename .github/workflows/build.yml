@@ -1,0 +1,32 @@
+name: Nuget Build
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: read
+
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 8.0.x
+        source-url: https://nuget.pkg.github.com/JBrLloyd/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Build and Pack
+      run: dotnet pack -c Release --output ${{ github.workspace }}/nuget
