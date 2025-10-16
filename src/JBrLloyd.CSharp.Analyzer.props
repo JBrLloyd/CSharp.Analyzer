@@ -1,5 +1,7 @@
 <Project>
   <PropertyGroup>
+    <RepositoryUrl>https://github.com/JBrLloyd/CSharp.Analyzer</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>JBrLloyd</Authors>
     <Nullable>enable</Nullable>
@@ -16,18 +18,29 @@
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <DebugType>embedded</DebugType>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <Optimize>true</Optimize>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' != '' AND $(TargetFramework.StartsWith('netcoreapp3.1')) OR $(TargetFramework.StartsWith('net')) AND $(TargetFramework.Length) &gt;= 6">
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
-  </ItemGroup>
-  <ItemGroup>
     <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)standard_editorconfig" />
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="StyleCop.Analyzers.Unstable" PrivateAssets="all" Version="1.2.0.556" />
     <PackageReference Include="Roslynator.Analyzers" PrivateAssets="all" Version="4.14.1" />
