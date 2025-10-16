@@ -6,6 +6,8 @@ name: JBrLloyd.CSharp.Analyzer Nuget Publish
 on:
   push:
     branches: [ "main" ]
+    paths:
+    - 'src/**'
 
 jobs:
   build:
