@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8</TargetFramework>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="JBrLloyd.CSharp.Analyzer" Version="*" PrivateAssets="all" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework.StartsWith('net6')) Or $(TargetFramework.StartsWith('netstandard'))">
+        <PackageReference Include="PolySharp" Version="1.15.0" PrivateAssets="all" />
+    </ItemGroup>
+</Project>
