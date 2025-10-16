@@ -21,7 +21,6 @@ indent_size = 2
 
 # Xml config files
 [*.{props,targets,config,nuspec}]
-indent_size = 2[*.{xml,stylecop,resx,ruleset}]
 indent_size = 2
 
 # Windows scripting files
