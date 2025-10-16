@@ -28,4 +28,4 @@ jobs:
       run: dotnet pack --configuration Release --output ${{ github.workspace }}/nuget
 
     - name: Publish Package
-      run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg --api-key ${{ secrets.NUGET_APIKEY }} --source https://nuget.pkg.github.com/JBrLloyd/index.json --skip-duplicate
+      run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg --source https://nuget.pkg.github.com/JBrLloyd/index.json --skip-duplicate --api-key ${{ secrets.NUGET_APIKEY }}
