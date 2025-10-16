@@ -4,5 +4,5 @@
   </Configurations>
 
   <Project Path="src/JBrLloyd.CSharp.Analyzer.csproj" />
-  <Project Path="samples/SampleApp.csproj" />
+  <Project Path="sample/SampleApp.csproj" />
 </Solution>
