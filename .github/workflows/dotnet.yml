@@ -24,9 +24,12 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+        source-url: https://nuget.pkg.github.com/JBrLloyd/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Build and Pack
       run: dotnet pack -c Release --output ${{ github.workspace }}/nuget
 
     - name: Publish Package
-      run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg --source https://nuget.pkg.github.com/JBrLloyd/index.json --skip-duplicate --api-key ${{ secrets.NUGET_APIKEY }}
+      run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg --skip-duplicate
